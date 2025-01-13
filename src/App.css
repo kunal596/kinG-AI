@@ -1,0 +1,336 @@
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box; /* Ensure padding and margins are included in width/height calculation */
+}
+
+/* Chat Window */
+.chat-window {
+  width: 100%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: #121212;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header */
+.chat-header {
+  background-color: #000;
+  padding: 15px;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Chat Box */
+.chat-box {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #181818;
+  max-height: calc(100% - 120px); /* Ensure space for header and input */
+  padding-bottom: 50px; /* Prevent message from touching input box */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Messages */
+.message {
+  display: flex;
+  margin-bottom: 15px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards; /* Apply animation */
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.assistant {
+  justify-content: flex-start;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-text {
+  max-width: 70%;
+  padding: 12px;
+  border-radius: 15px;
+  background-color: #333;
+  color: #eaeaea;
+  word-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.message.user .message-text {
+  background-color: #0078d4;
+}
+
+.message.assistant .message-text {
+  background-color: #444;
+}
+
+/* Code Block Styling */
+.code-block {
+  background-color: #2a2a2a;
+  color: #dcdcdc;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  max-width: 75%;
+  overflow-x: auto;
+}
+
+/* Loading Spinner */
+.message.assistant .hash-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Chat Input */
+.chat-input {
+  padding: 15px;
+  background-color: #121212;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #444;
+  position: relative;
+}
+
+.chat-input input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #555;
+  border-radius: 30px;
+  margin-right: 10px;
+  transition: all 0.3s;
+  background-color: #333;
+  color: white;
+  box-sizing: border-box;
+}
+
+.chat-input input:focus {
+  border-color: #0078d4;
+  outline: none;
+}
+
+.chat-input button {
+  background-color: #0078d4;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-input button:hover {
+  background-color: #005bb5;
+  transform: scale(1.05); /* Reduced scale for a more subtle effect */
+}
+
+.chat-input button i {
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-window {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .message-text {
+    max-width: 85%;
+  }
+
+  .chat-input input {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .chat-input button {
+    padding: 12px;
+  }
+
+  /* Adjust chat window size */
+  .chat-box {
+    padding: 10px;
+    max-height: calc(100% - 120px);
+  }
+
+  .message .message-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* App.css */
+/* App.css */
+.App {
+  position: relative;
+  min-height: 100vh;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place the video behind the content */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video covers the entire screen */
+}
+
+.content {
+  position: relative;
+  z-index: 1; /* Ensure the content is on top of the video */
+  padding: 20px;
+  color: white;
+}
+
+.centered-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for chat window */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.chat-box {
+  width: 100%;
+  max-width: 600px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.message .avatar {
+  margin-right: 10px;
+}
+
+.message-text {
+  max-width: 400px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+.message.user .message-text {
+  background-color: #4e91d3; /* User message color */
+}
+
+.message.assistant .message-text {
+  background-color: #1e1e1e; /* Assistant message color */
+}
+
+.chat-input {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px;
+  border: none;
+  background-color: #4e91d3;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #3696c5;
+}
+
+.loading-placeholder {
+  text-align: center;
+  color: white;
+}
+
+.start-conversation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* Adjust this height based on your design */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
